@@ -38,8 +38,10 @@ function debug () {
   })
 }
 
+var config;
 
-function clusterMaster (config) {
+function clusterMaster (aConfig) {
+  config = aConfig;
   if (typeof config === "string") config = { exec: config }
 
   if (!config.exec) {
