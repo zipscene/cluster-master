@@ -78,7 +78,7 @@ function clusterMaster (aConfig) {
 
   if (config.signals !== false) {
     // sighup/sigint listeners
-    setupSignals()
+    setupSignals(config)
   }
 
   forkListener()
@@ -496,10 +496,10 @@ function quit () {
 }
 
 
-function setupSignals () {
+function setupSignals (config) {
   try {
-    process.on("SIGHUP", restart)
-    process.on("SIGINT", quit)
+    if(config.sighup !== false) process.on("SIGHUP", restart)
+    if(config.sigint !== false) process.on("SIGINT", quit)
   } catch (e) {
     // Must be on Windows, waaa-waaah.
   }
